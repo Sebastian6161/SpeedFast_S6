@@ -1,77 +1,244 @@
-# SpeedFast - Sistema de Gestión de Pedidos
+# SpeedFast - Gestión de Pedidos
 
-Sistema de gestión de pedidos y asignación de repartidores desarrollado en **Java (Swing)** aplicando el patrón de diseño **MVC (Modelo-Vista-Controlador)** y pruebas unitarias con **JUnit 5**.
+Proyecto desarrollado en Java para la gestión y simulación de entregas de pedidos de SpeedFast.
 
----
+El proyecto incorpora una interfaz gráfica desarrollada con Java Swing, junto con un sistema de gestión de pedidos, repartidores, estados de entrega y una cola de procesamiento.
 
-##  Descripción del Proyecto
-
-**SpeedFast** es una aplicación de escritorio orientada a administrar la recepción, asignación y entrega de pedidos. Hace uso de una estructura de datos tipo cola (`Queue`) para organizar y procesar las entregas de manera secuencial o por lotes.
-
-### Características Principales:
-- **Registro de Pedidos**: Ingreso de nuevos pedidos con ID único, dirección y categoría (`comida`, `encomienda`, `express`).
-- **Listado Dinámico**: Interfaz con `JTable` para visualizar en tiempo real el estado actual y el repartidor asignado a cada pedido.
-- **Asignación de Repartidores**: Vinculación de un pedido pendiente a un repartidor disponible, cambiando su estado a `EN_REPARTO`.
-- **Procesamiento en Cola**: Ejecución masiva de la cola de despachos, actualizando el estado de los pedidos a `ENTREGADO`.
-- **Pruebas Unitarias Robustas**: Cobertura de pruebas automatizadas y parametrizadas para validar el comportamiento del controlador y el manejo de interrupciones.
+Además, se incorporaron pruebas automatizadas para validar el procesamiento con distintas cantidades de pedidos y repartidores, el comportamiento de una cola vacía y los estados finales cuando ocurre una interrupción.
 
 ---
 
-## Estructura del Proyecto
+## Tecnologías utilizadas
 
-El proyecto está organizado siguiendo el patrón **MVC**:
+- Java 26
+- Java Swing
+- Maven
+- JUnit 5
+- IntelliJ IDEA
+- Git y GitHub
+
+---
+
+## Estructura del proyecto
+
+El proyecto se encuentra organizado en los siguientes paquetes:
 
 ```text
-src/
- ├── controladores/
- │    └── PedidoController.java      # Lógica de negocio y manejo de la cola
- ├── modelo/
- │    ├── EstadoPedido.java          # Enum (PENDIENTE, EN_REPARTO, ENTREGADO, INTERRUMPIDO)
- │    ├── Pedido.java                # Entidad Pedido
- │    └── Repartidor.java            # Entidad Repartidor
- ├── vista/
- │    ├── VentanaPrincipal.java      # Menú principal con las 4 acciones de navegación
- │    ├── VentanaRegistroPedido.java # Formulario para registrar pedidos
- │    ├── VentanaAsignarEntrega.java # Asignación de repartidores
- │    └── VentanaListaPedidos.java   # Tabla con el estado de todos los pedidos
- └── main/
-      └── Main.java                  # Punto de entrada de la aplicación
+src
+├── main
+│   └── java
+│       ├── controladores
+│       │   └── PedidoController.java
+│       │
+│       ├── main
+│       │   └── Main.java
+│       │
+│       ├── modelo
+│       │   ├── EstadoPedido.java
+│       │   ├── Pedido.java
+│       │   └── Repartidor.java
+│       │
+│       └── vista
+│           ├── VentanaPrincipal.java
+│           ├── VentanaRegistroPedido.java
+│           ├── VentanaListaPedidos.java
+│           └── VentanaAsignarEntrega.java
+│
+└── test
+    └── java
+        └── controladores
+            └── PedidoControllerTest.java
+
+
 ```
----
-## Flujo de Trabajo y Estados del Pedido
-```text
-[ Registrado ] --> PENDIENTE --(Asignar Repartidor)--> EN_REPARTO --(Procesar Cola)--> ENTREGADO
-                                                                  \--(Interrupción)--> INTERRUMPIDO
+
+# Funcionalidades Principales
+
+1. Registrar pedidos
+
+La aplicación permite registrar nuevos pedidos mediante una ventana gráfica.
+
+Para cada pedido se ingresan:
+
+ID
+Dirección
+Tipo de pedido
+
+Los tipos disponibles son:
+
+comida
+encomienda
+express
+
+El sistema valida que los campos obligatorios estén completos y que el ID sea un número mayor que 0.
+
+Al registrar un pedido, este queda inicialmente en estado:
 ```
-Registrar pedido: El pedido se ingresa con el estado PENDIENTE y se añade a la cola de atención.
-
-Asignar repartidor: Se vincula el repartidor seleccionado y el estado cambia a EN_REPARTO.
-
-Procesar cola de entregas: Al presionar el botón de procesamiento en el menú principal, se vacía la cola mediante procesarCola() y los pedidos cambian su estado final a ENTREGADO.
-
-## Ejecución de Pruebas Unitarias
-Pruebas Parametrizadas: Escenarios dinámicos con distintas cantidades de pedidos y repartidores usando @ParameterizedTest y @CsvSource.
-
-Prueba de Cola Vacía: Verificación de que no se generen excepciones al procesar una cola sin elementos.
-
-Prueba de Interrupción: Validación del estado INTERRUMPIDO cuando el proceso se detiene antes del límite establecido.
-
-Para ejecutar las pruebas en tu IDE (IntelliJ IDEA / Eclipse / NetBeans):
-
-Haz clic derecho sobre la clase PedidoControllerTest.java.
-
-```text
-Selecciona Run 'PedidoControllerTest' (o Ejecutar como -> Test de JUnit).
+PENDIENTE
 ```
----
 
-## Cómo Ejecutar la Aplicación
+Además, el pedido es agregado a la lista general de pedidos y a la cola de procesamiento.
 
-### Desde IntelliJ IDEA:
-1. Navega hasta el archivo `src/main/java/main/Main.java`.
-2. Haz clic en el botón **Run** (icono del triángulo verde `▶`) junto a la clase o método `main`.
+# Listar pedidos
 
----
-👤 Autor
-Sebastián Ignacio Ávila Sanhueza.
+La aplicación cuenta con una ventana que permite visualizar los pedidos registrados mediante una tabla ```JTable```.
 
+La tabla muestra:
+
+ID
+Dirección
+Tipo
+Estado
+Repartidor
+
+La información puede actualizarse mediante el botón:
+
+```Actualizar```
+
+Esto permite visualizar los cambios producidos en los pedidos después de asignar repartidores o procesar la cola.
+
+# Asignar repartidores
+
+La aplicación permite seleccionar:
+
+Un pedido pendiente.
+Un repartidor disponible.
+
+Los repartidores iniciales son:
+
+Carlos
+María
+Pedro
+
+Al asignar un repartidor, el pedido cambia al estado:
+
+``` EN_REPARTO ```
+
+La información del repartidor queda asociada al pedido.
+
+# Cola de pedidos
+
+Los pedidos registrados son almacenados también en una cola utilizando:
+
+```  Queue<Pedido> ``` 
+
+La cola permite procesar los pedidos en el orden en que fueron agregados.
+
+El sistema cuenta con una opción:
+
+```  Procesar cola de entregas ``` 
+
+Cuando se procesa la cola, los pedidos son asignados a los repartidores disponibles y posteriormente pasan al estado:
+
+```  ENTREGADO ``` 
+
+La asignación de repartidores durante el procesamiento se realiza de manera rotativa.
+
+# Estados de los pedidos
+
+Los pedidos pueden utilizar los siguientes estados:
+
+``` 
+PENDIENTE
+EN_REPARTO
+ENTREGADO
+INTERRUMPIDO
+PENDIENTE
+``` 
+
+Estado inicial de un pedido recién registrado.
+
+ EN_REPARTO 
+
+Se establece cuando un repartidor es asignado al pedido.
+
+ENTREGADO
+
+Se establece cuando el pedido es procesado correctamente mediante la cola.
+
+INTERRUMPIDO
+
+Se utiliza cuando el procesamiento de la cola es interrumpido antes de completar todos los pedidos.
+
+# Procesamiento con interrupción
+
+El controlador también permite simular una interrupción durante el procesamiento de la cola.
+
+El método:
+
+``` procesarConInterrupcion() ``` 
+
+permite definir una cantidad máxima de pedidos que serán procesados antes de producir la interrupción.
+
+Los pedidos procesados antes del límite quedan en:
+
+``` ENTREGADO``` 
+
+Los pedidos restantes quedan en:
+
+``` INTERRUMPIDO``` 
+
+Finalmente, la cola queda vacía.
+
+# Pruebas automatizadas
+
+El proyecto incluye pruebas unitarias desarrolladas con JUnit 5.
+
+Las pruebas se encuentran en:
+
+``` src/test/java/controladores/PedidoControllerTest.java``` 
+
+Prueba con distintas cantidades
+
+Se utiliza una prueba parametrizada para verificar el procesamiento con diferentes cantidades de pedidos y repartidores.
+
+Los casos utilizados son:
+
+
+| Pedidos | Repartidores |
+| :---: | :---: |
+| 1 | 1 |
+| 10 | 2 |
+| 50 | 5 |
+| 100 | 10 |
+
+
+En cada caso se verifica que:
+- Los pedidos sean agregados correctamente.
+- La cantidad de pedidos en la cola sea correcta.
+- La cola quede vacía después del procesamiento.
+- Todos los pedidos finalicen como `ENTREGADO`.
+- Cada pedido tenga un repartidor asignado.
+
+También se verifica el comportamiento cuando no existen pedidos pendientes.
+
+Se comprueba que:
+
+- La cola comience vacía.
+- El procesamiento no genere excepciones.
+- La cola permanezca vacía.
+- Prueba de interrupción
+
+Se utilizan 10 pedidos y se establece un límite de procesamiento de 4 pedidos.
+
+El resultado esperado es:
+
+``` 
+4 pedidos → ENTREGADO
+6 pedidos → INTERRUMPIDO
+```
+
+**También se comprueba que la cola quede vacía y que todos los pedidos tengan un estado final válido.**
+
+
+# Cómo ejecutar el proyecto
+
+IntelliJ IDEA
+Abrir el proyecto en IntelliJ IDEA.
+Esperar a que Maven cargue las dependencias.
+Abrir:
+src/main/java/main/Main.java
+Ejecutar el método:
+main()
+
+Se abrirá la ventana principal de SpeedFast.
