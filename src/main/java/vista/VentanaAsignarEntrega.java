@@ -34,7 +34,7 @@ public class VentanaAsignarEntrega extends JFrame {
         cargarPedidos();
         cargarRepartidores();
 
-        JButton botonIniciar = new JButton("Iniciar entrega");
+        JButton botonAsignar = new JButton("Asignar Repartidor");
 
         add(etiquetaPedido);
         add(comboPedidos);
@@ -43,9 +43,9 @@ public class VentanaAsignarEntrega extends JFrame {
         add(comboRepartidores);
 
         add(new JLabel());
-        add(botonIniciar);
+        add(botonAsignar);
 
-        botonIniciar.addActionListener(e -> iniciarEntrega());
+        botonAsignar.addActionListener(e -> iniciarEntrega());
     }
 
     private void cargarPedidos() {
@@ -90,7 +90,7 @@ public class VentanaAsignarEntrega extends JFrame {
 
         JOptionPane.showMessageDialog(
                 this,
-                "Entrega iniciada correctamente.\n\n"
+                "Repartidor asignado correctamente.\n\n"
                         + "Pedido: #" + pedidoSeleccionado.getId()
                         + "\n"
                         + "Dirección: "
@@ -99,7 +99,8 @@ public class VentanaAsignarEntrega extends JFrame {
                         + "Repartidor: "
                         + repartidorSeleccionado.getNombre()
                         + "\n"
-                        + "Estado: EN REPARTO"
+                        + "Estado: EN REPARTO\n\n"
+                        + "(Procese la cola desde el menú principal para finalizar a ENTREGADO)"
         );
 
         dispose();

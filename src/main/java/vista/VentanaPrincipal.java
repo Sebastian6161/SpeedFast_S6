@@ -14,7 +14,7 @@ public class VentanaPrincipal extends JFrame {
         this.pedidoController = pedidoController;
 
         setTitle("SpeedFast - Gestión de Pedidos");
-        setSize(450, 350);
+        setSize(450, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -29,7 +29,7 @@ public class VentanaPrincipal extends JFrame {
 
         JPanel panelBotones = new JPanel();
         panelBotones.setLayout(
-                new GridLayout(3, 1, 10, 10)
+                new GridLayout(4, 1, 10, 10)
         );
 
         JButton botonRegistrar =
@@ -39,11 +39,15 @@ public class VentanaPrincipal extends JFrame {
                 new JButton("Listar pedidos");
 
         JButton botonEntrega =
-                new JButton("Asignar repartidor / Iniciar entrega");
+                new JButton("Asignar repartidor");
+
+        JButton botonProcesarCola =
+                new JButton("Procesar cola de entregas");
 
         panelBotones.add(botonRegistrar);
         panelBotones.add(botonListar);
         panelBotones.add(botonEntrega);
+        panelBotones.add(botonProcesarCola);
 
         add(titulo, BorderLayout.NORTH);
         add(panelBotones, BorderLayout.CENTER);
@@ -62,5 +66,14 @@ public class VentanaPrincipal extends JFrame {
                 new VentanaAsignarEntrega(pedidoController)
                         .setVisible(true)
         );
+
+        botonProcesarCola.addActionListener(e -> {
+            if (pedidoController.obtenerColaPedidos().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No hay pedidos pendientes en la cola para procesar.");
+            } else {
+                pedidoController.procesarCola();
+                JOptionPane.showMessageDialog(this, "Se han procesado todas las entregas en la cola.");
+            }
+        });
     }
 }
