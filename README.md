@@ -66,5 +66,5 @@ Selecciona Run 'PedidoControllerTest' (o Ejecutar como -> Test de JUnit).
 
 ---
 👤 Autor
-Desarrollado para la asignatura de programación/evaluación semana 6 del sistema SpeedFast.
+Sebastián Ignacio Ávila Sanhueza.
 
