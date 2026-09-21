@@ -60,7 +60,10 @@ Para ejecutar las pruebas en tu IDE (IntelliJ IDEA / Eclipse / NetBeans):
 
 Haz clic derecho sobre la clase PedidoControllerTest.java.
 
+```text
 Selecciona Run 'PedidoControllerTest' (o Ejecutar como -> Test de JUnit).
+```
+
 ---
 👤 Autor
 Desarrollado para la asignatura de programación/evaluación semana 6 del sistema SpeedFast.
