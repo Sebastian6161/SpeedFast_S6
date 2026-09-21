@@ -39,14 +39,16 @@ src/
 ```
 ---
 ## Flujo de Trabajo y Estados del Pedido
+```text
 [ Registrado ] --> PENDIENTE --(Asignar Repartidor)--> EN_REPARTO --(Procesar Cola)--> ENTREGADO
                                                                   \--(Interrupción)--> INTERRUMPIDO
+```
 Registrar pedido: El pedido se ingresa con el estado PENDIENTE y se añade a la cola de atención.
 
 Asignar repartidor: Se vincula el repartidor seleccionado y el estado cambia a EN_REPARTO.
 
 Procesar cola de entregas: Al presionar el botón de procesamiento en el menú principal, se vacía la cola mediante procesarCola() y los pedidos cambian su estado final a ENTREGADO.
----
+
 ## Ejecución de Pruebas Unitarias
 Las pruebas automatizadas se encuentran en la clase PedidoControllerTest.java e incluyen:
 
