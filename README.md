@@ -4,7 +4,7 @@ Sistema de gestión de pedidos y asignación de repartidores desarrollado en **J
 
 ---
 
-## 📌 Descripción del Proyecto
+##  Descripción del Proyecto
 
 **SpeedFast** es una aplicación de escritorio orientada a administrar la recepción, asignación y entrega de pedidos. Hace uso de una estructura de datos tipo cola (`Queue`) para organizar y procesar las entregas de manera secuencial o por lotes.
 
