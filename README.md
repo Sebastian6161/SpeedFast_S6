@@ -71,11 +71,6 @@ Selecciona Run 'PedidoControllerTest' (o Ejecutar como -> Test de JUnit).
 1. Navega hasta el archivo `src/main/java/main/Main.java`.
 2. Haz clic en el botón **Run** (icono del triángulo verde `▶`) junto a la clase o método `main`.
 
-### Desde la Terminal (usando Maven):
-1. Abre la terminal en la raíz del proyecto.
-2. Compila el proyecto ejecutando:
-   ```bash
-   mvn clean compile
 ---
 👤 Autor
 Sebastián Ignacio Ávila Sanhueza.
