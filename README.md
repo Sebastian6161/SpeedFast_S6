@@ -242,3 +242,32 @@ Ejecutar el método:
 main()
 
 Se abrirá la ventana principal de SpeedFast.
+
+# Ejecutar las pruebas
+Para ejecutar las pruebas automatizadas desde IntelliJ IDEA:
+
+Abrir:
+```  src/test/java/controladores/PedidoControllerTest.java ``` 
+Hacer clic derecho sobre la clase.
+Seleccionar Run 'PedidoControllerTest'.
+
+# Mejoras incorporadas a partir de la retroalimentación
+
+A partir de la retroalimentación recibida en la evaluación anterior, se incorporaron mejoras orientadas a comprobar el funcionamiento del sistema en diferentes escenarios.
+
+Entre ellas:
+
+Pruebas repetibles con diferentes cantidades de pedidos y repartidores.
+Validación de una cola inicialmente vacía.
+Validación de los estados finales de los pedidos.
+Simulación de interrupciones durante el procesamiento.
+Verificación de que la cola quede vacía después del procesamiento.
+Pruebas automatizadas mediante JUnit 5.
+Documentación de la ejecución y de las pruebas disponibles.
+
+Estas mejoras permiten comprobar el comportamiento del sistema en diferentes escenarios de procesamiento.
+
+# Autor
+Sebastián Ávila
+
+
