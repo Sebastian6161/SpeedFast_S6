@@ -50,8 +50,6 @@ Asignar repartidor: Se vincula el repartidor seleccionado y el estado cambia a E
 Procesar cola de entregas: Al presionar el botón de procesamiento en el menú principal, se vacía la cola mediante procesarCola() y los pedidos cambian su estado final a ENTREGADO.
 
 ## Ejecución de Pruebas Unitarias
-Las pruebas automatizadas se encuentran en la clase PedidoControllerTest.java e incluyen:
-
 Pruebas Parametrizadas: Escenarios dinámicos con distintas cantidades de pedidos y repartidores usando @ParameterizedTest y @CsvSource.
 
 Prueba de Cola Vacía: Verificación de que no se generen excepciones al procesar una cola sin elementos.
