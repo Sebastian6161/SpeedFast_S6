@@ -36,6 +36,7 @@ src/
  │    └── VentanaListaPedidos.java   # Tabla con el estado de todos los pedidos
  └── main/
       └── Main.java                  # Punto de entrada de la aplicación
+```
 ---
 ## Flujo de Trabajo y Estados del Pedido
 [ Registrado ] --> PENDIENTE --(Asignar Repartidor)--> EN_REPARTO --(Procesar Cola)--> ENTREGADO
